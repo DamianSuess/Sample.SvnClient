@@ -1,6 +1,6 @@
 ﻿namespace SimpleSvnClient
 {
-  partial class Form1
+  partial class MainForm
   {
     /// <summary>
     /// Required designer variable.
@@ -91,9 +91,9 @@
       this.label3.AutoSize = true;
       this.label3.Location = new System.Drawing.Point(6, 74);
       this.label3.Name = "label3";
-      this.label3.Size = new System.Drawing.Size(32, 13);
+      this.label3.Size = new System.Drawing.Size(37, 13);
       this.label3.TabIndex = 5;
-      this.label3.Text = "URL:";
+      this.label3.Text = "Creds:";
       // 
       // txtUser
       // 
@@ -150,7 +150,7 @@
       this.lblProgress.TabIndex = 4;
       this.lblProgress.Text = "Progress: Idle";
       // 
-      // Form1
+      // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -159,8 +159,9 @@
       this.Controls.Add(this.BtnCheckout);
       this.Controls.Add(this.groupBox1);
       this.Controls.Add(this.BtnLogHistory);
-      this.Name = "Form1";
+      this.Name = "MainForm";
       this.Text = "SVNSharp Client";
+      this.Load += new System.EventHandler(this.MainForm_Load);
       this.groupBox1.ResumeLayout(false);
       this.groupBox1.PerformLayout();
       this.ResumeLayout(false);

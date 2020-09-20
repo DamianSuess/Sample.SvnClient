@@ -5,9 +5,9 @@ using SharpSvn;
 
 namespace SimpleSvnClient
 {
-  public partial class Form1 : Form
+  public partial class MainForm : Form
   {
-    public Form1()
+    public MainForm()
     {
       InitializeComponent();
 
@@ -62,6 +62,9 @@ namespace SimpleSvnClient
         {
           Collection<SvnLogEventArgs> logItems = new Collection<SvnLogEventArgs>();
           client.GetLog(repo, out logItems);
+
+          SettingsSave();
+
           foreach (var item in logItems)
           {
             Console.WriteLine($"Rev: {item.Revision} - {item.Time}");
@@ -109,6 +112,8 @@ namespace SimpleSvnClient
           client.Processing += Client_Processing;
           client.CheckOut(repo, path);
 
+          SettingsSave();
+
           //SvnUriTarget target = new SvnUriTarget(txtRepo.Text);
           //if (client.CheckOut(target, path, checkoutArgs, out updateResult))
           //{
@@ -150,6 +155,28 @@ namespace SimpleSvnClient
       var stats = $"Total: {e.TotalProgress} - Progress: {e.Progress}";
       lblProgress.Text = "Progress - " + stats;
       Console.WriteLine(stats);
+    }
+
+    private void MainForm_Load(object sender, EventArgs e)
+    {
+    }
+
+    private void SettingsLoad()
+    {
+      var ini = new IniFile();
+      txtRepo.Text = ini.Read("Settings", "Repository");
+      txtUser.Text = ini.Read("Settings", "User");
+      txtPass.Text = ini.Read("Settings", "Pass");
+      txtPath.Text = ini.Read("Settings", "OutputPath");
+    }
+
+    private void SettingsSave()
+    {
+      var ini = new IniFile();
+      ini.Write("Settings", "Repository", txtRepo.Text);
+      ini.Write("Settings", "User", txtUser.Text);
+      ini.Write("Settings", "Pass", txtPass.Text);
+      ini.Write("Settings", "OutputPath", txtPath.Text);
     }
   }
 }
